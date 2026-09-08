@@ -1,36 +1,65 @@
-function additional(incomes) {
-    let income = document.getElementById("incomeAmount").value;
-    let incomeNumber = 0;
+const addIncomeButton = document.getElementById("addIncomeButton");
+const additionalIncomeFields = document.getElementById("additionalIncomeFields");
 
-function additional(incomeAmount) {
-  const fields = document.getElementById("additionalIncomeFields");
+let incomeNumber = 0;
 
-  // Remove the extra fields if income is zero or blank
-  if (incomeAmount <= 0) {
-    fields.innerHTML = "";
-    return;
-  }
+function addIncomeFields() {
+  incomeNumber += 1;
 
-  // Prevent creating duplicates while the user types
-  if (fields.children.length > 0) {
-    return;
-  }
+  const fieldGroup = document.createElement("p");
+  fieldGroup.innerHTML = `
+    <label for="incomeType${incomeNumber}">Income name:</label>
+    <input type="text" id="incomeType${incomeNumber}" name="incomeType${incomeNumber}">
 
-  incomeNumber++;
-
-  const amountId = `incomeAmount${incomeNumber}`;
-  const typeId = `incomeType${incomeNumber}`;
-
-  fields.innerHTML = `
-    <label for="${amountId}">Additional income amount:</label>
-    <input type="number" id="${amountId}" name="${amountId}" min="0">
-
-    <label for="${typeId}">Income type:</label>
-    <input type="text" id="${typeId}" name="${typeId}" placeholder="Example: Freelance">
+    <label for="incomeAmount${incomeNumber}">Amount:</label>
+    <input type="number" id="incomeAmount${incomeNumber}" name="incomeAmount${incomeNumber}" min="0">
   `;
-}
-const incomeInput = document.getElementById("income");
 
-incomeInput.addEventListener("input", () => {
-  additional(Number(incomeInput.value));
-});}
+  additionalIncomeFields.appendChild(fieldGroup);
+}
+
+addIncomeButton.addEventListener("click", addIncomeFields);
+
+const addExpenseButton = document.getElementById("addExpenseButton");
+const additionalExpenseFields = document.getElementById("additionalExpenseFields");
+
+let expenseNumber = 0;
+
+function addExpenseFields() {
+  expenseNumber += 1;
+
+  const fieldGroup = document.createElement("p");
+  fieldGroup.innerHTML = `
+    <label for="expenseType${expenseNumber}">Expense name:</label>
+    <input type="text" id="expenseType${expenseNumber}" name="expenseType${expenseNumber}">
+
+    <label for="expenseAmount${expenseNumber}">Amount:</label>
+    <input type="number" id="expenseAmount${expenseNumber}" name="expenseAmount${expenseNumber}" min="0">
+  `;
+
+  additionalExpenseFields.appendChild(fieldGroup);
+}
+
+addExpenseButton.addEventListener("click", addExpenseFields);
+
+const addSavingsButton = document.getElementById("addSavingsButton");
+const additionalSavingsFields = document.getElementById("additionalSavingsFields");
+
+let savingsNumber = 0;
+
+function addSavingsFields() {
+  savingsNumber += 1;
+
+  const fieldGroup = document.createElement("p");
+  fieldGroup.innerHTML = `
+    <label for="savingsType${savingsNumber}">Savings name:</label>
+    <input type="text" id="savingsType${savingsNumber}" name="savingsType${savingsNumber}">
+
+    <label for="savingsAmount${savingsNumber}">Amount:</label>
+    <input type="number" id="savingsAmount${savingsNumber}" name="savingsAmount${savingsNumber}" min="0">
+  `;
+
+  additionalSavingsFields.appendChild(fieldGroup);
+}
+
+addSavingsButton.addEventListener("click", addSavingsFields);

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Budget Tracker</h1> 
+        <nav>   
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="Budget.html">Budget</a></li>
+                <li><a href="financialHealth.html">Expenses</a></li>
+                <li><a href="accountshtml">Income</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>Budget </h2>
+            <p>Welcome to the Budget Tracker! Here you can manage your budget and track your expenses. Use the form below to add your budget details.</p>
+            <form id="budgetForm">
+                <p>
+                <label for="incomeType">Income Name:</label>
+                <input type="text" id="incomeType" name="incomeType" required>
+                <label for="incomeAmount">Amount:</label>
+                <input type="number" id="incomeAmount" name="incomeAmount" required>
+                <button type="button" id="addIncomeButton">Add Income</button>
+                </p>
+                <div id="additionalIncomeFields"></div>
+            </form>
+        </section>
+    </main>
+<script src="budget.js"></script>
+</body>
+</html>

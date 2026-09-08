@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>JavaScript Income Inputs — Study Notes</title>
+  <style>
+    @page { margin: 0.8in; }
+    body { font-family: Arial, sans-serif; line-height: 1.45; color: #1f2937; max-width: 7in; margin: auto; }
+    h1 { color: #0f3d5e; } h2 { color: #155e75; margin-top: 1.35em; }
+    code { font-family: "Liberation Mono", monospace; background: #f1f5f9; padding: 0.08em 0.25em; }
+    pre { background: #f1f5f9; border-left: 4px solid #155e75; padding: 0.8em; white-space: pre-wrap; }
+    pre code { padding: 0; }
+  </style>
+</head>
+<body>
+  <h1>JavaScript Income Inputs — Study Notes</h1>
+  <h2>Basic function syntax</h2>
+  <pre><code>function greet(name) {
+  return `Hello, ${name}!`;
+}</code></pre>
+  <p>An arrow-function version:</p>
+  <pre><code>const add = (a, b) =&gt; a + b;</code></pre>
+
+  <h2>Goal</h2>
+  <p>When the main monthly income is greater than zero, show fields for an additional income amount and income type. Each field needs a unique ID.</p>
+
+  <h2>HTML</h2>
+  <p>Place this container where the extra inputs should appear:</p>
+  <pre><code>&lt;div id="additionalIncomeFields"&gt;&lt;/div&gt;</code></pre>
+  <p>Make sure the JavaScript file is loaded near the end of the page:</p>
+  <pre><code>&lt;script src="budget.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+  <h2>JavaScript</h2>
+  <pre><code>let incomeNumber = 0;
+
+function additional(incomeAmount) {
+  const fields = document.getElementById("additionalIncomeFields");
+
+  if (incomeAmount &lt;= 0) {
+    fields.innerHTML = "";
+    return;
+  }
+
+  if (fields.children.length &gt; 0) {
+    return;
+  }
+
+  incomeNumber++;
+
+  const amountId = `incomeAmount${incomeNumber}`;
+  const typeId = `incomeType${incomeNumber}`;
+
+  fields.innerHTML = `
+    &lt;label for="${amountId}"&gt;Additional income amount:&lt;/label&gt;
+    &lt;input type="number" id="${amountId}" name="${amountId}" min="0"&gt;
+
+    &lt;label for="${typeId}"&gt;Income type:&lt;/label&gt;
+    &lt;input type="text" id="${typeId}" name="${typeId}" placeholder="Example: Freelance"&gt;
+  `;
+}
+
+const incomeInput = document.getElementById("income");
+
+incomeInput.addEventListener("input", () =&gt; {
+  additional(Number(incomeInput.value));
+});</code></pre>
+
+  <h2>Line-by-line notes</h2>
+  <p><code>let incomeNumber = 0;</code> keeps count of the generated income fields so their IDs can be unique.</p>
+  <p><code>function additional(incomeAmount)</code> defines a function that receives the value typed into the main income field.</p>
+  <p><code>document.getElementById("additionalIncomeFields")</code> finds the HTML container where the extra inputs will be displayed.</p>
+  <p><code>if (incomeAmount &lt;= 0)</code> checks whether the main income is zero, negative, or blank. <code>fields.innerHTML = ""</code> clears the extra inputs, and <code>return</code> ends the function immediately.</p>
+  <p><code>if (fields.children.length &gt; 0)</code> checks whether the extra inputs already exist. The <code>return</code> avoids creating duplicate fields every time a user types another character.</p>
+  <p><code>incomeNumber++;</code> adds one to the counter. The first generated group uses <code>1</code>.</p>
+  <p>The template strings <code>`incomeAmount${incomeNumber}`</code> and <code>`incomeType${incomeNumber}`</code> make IDs such as <code>incomeAmount1</code> and <code>incomeType1</code>.</p>
+  <p><code>fields.innerHTML = `...`</code> inserts the labels and inputs into the container. Backticks allow multiple lines and <code>${...}</code> inserts variables into the HTML.</p>
+  <p><code>const incomeInput = document.getElementById("income")</code> finds the original input with <code>id="income"</code>.</p>
+  <p><code>addEventListener("input", ...)</code> runs whenever the user types, deletes, or pastes in that input. <code>Number(incomeInput.value)</code> converts the input's text value into a number before passing it to <code>additional</code>.</p>
+</body>
+</html>

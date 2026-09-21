@@ -62,4 +62,5 @@ function addSavingsFields() {
   additionalSavingsFields.appendChild(fieldGroup);
 }
 
+
 addSavingsButton.addEventListener("click", addSavingsFields);

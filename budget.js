@@ -64,3 +64,5 @@ function addSavingsFields() {
 
 
 addSavingsButton.addEventListener("click", addSavingsFields);
+
+//TODO: Add event listeners for form submission to handle the data and send it to the server or process it as needed.
